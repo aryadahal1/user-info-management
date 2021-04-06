@@ -1,21 +1,28 @@
 package com.vastika.uim.controller;
 
+import com.vastika.uim.model.User;
+import com.vastika.uim.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-class UserController {
+public class UserController {
+
+    @Autowired
+    private UserService  userService;
 
     @RequestMapping(value = "/add_user", method = RequestMethod.GET)
-    String getUserForm(){
+    public String getUserForm(){
         return "addUser";
     }
     @RequestMapping(value = "/save_user", method = RequestMethod.POST)
-    String saveUser(@RequestParam ("uname") String username , @RequestParam String pass){
-        System.out.println(username + " " + pass);
-        return "addUser";
+    public String saveUser(@ModelAttribute User user){
+       userService.saveUser(user);
+       return "addUser";
     }
 }
