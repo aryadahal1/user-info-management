@@ -2,9 +2,16 @@ package com.vastika.uim.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table (name="user_tbl")
 public class User {
+
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    private int id;
     private String username;
     private String password;
     private long mobileNo;
