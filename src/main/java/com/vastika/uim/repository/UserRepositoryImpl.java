@@ -1,6 +1,7 @@
 package com.vastika.uim.repository;
 
 import com.vastika.uim.model.User;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +23,31 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public void updateUser(User user) {
-
+        Session session = getSession();
+        session.update(user);
     }
 
     @Override
     public void deleteUser(int id) {
-
+        User user = getUserById(id);
+        if(user != null){
+            Session session = getSession();
+            session.delete(user);
+        }
     }
 
     @Override
     public User getUserById(int id) {
-        return null;
+        Session session = getSession();
+        User user = session.get(User.class, id);
+        return user;
     }
 
     @Override
     public List<User> getAllUser() {
-        return null;
+        Session session = getSession();
+        Criteria criteria = session.createCriteria(User.class);
+        return criteria.list();
     }
 
     public Session getSession(){

@@ -23,6 +23,15 @@ public class User {
     private String nationality;
     private String comments;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
     public String getUsername() {
         return username;
     }
